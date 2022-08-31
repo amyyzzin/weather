@@ -37,6 +37,8 @@ public class DiaryService {
 
 	private final DiaryRepository diaryRepository;
 	private final DateWeatherRepository dateWeatherRepository;
+
+	//logback을 이용해 log작성
 	private static final Logger logger = LoggerFactory.getLogger(
 		WeatherApplication.class);
 
@@ -47,6 +49,7 @@ public class DiaryService {
 	}
 
 
+	//매일 새벽 1시에 날씨 데이터를 받아옴
 	@Scheduled(cron = "0 0 1 * * *")
 	@Transactional
 	public void saveWeatherDate() {
