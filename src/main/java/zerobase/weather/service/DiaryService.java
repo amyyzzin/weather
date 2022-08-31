@@ -75,8 +75,6 @@ public class DiaryService {
 		nowDiary.setDateWeather(dateWeather);
 		diaryRepository.save(nowDiary);
 		logger.info("end to create diary");
-		logger.error("ERROR!!!");
-		logger.warn("WARNING!!");
 	}
 
 	private DateWeather getWeatherFromApi() {
