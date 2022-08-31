@@ -2,6 +2,8 @@ package zerobase.weather.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
@@ -31,6 +33,8 @@ import zerobase.weather.repository.DiaryRepository;
 @Service
 @Transactional
 public class DiaryService {
+
+	private final double KELVIN_TEMPERATURE = 273.16;
 
 	@Value("${openWeatherMap.key}")
 	private String apiKey;
@@ -85,7 +89,9 @@ public class DiaryService {
 		dateWeather.setDate(LocalDate.now());
 		dateWeather.setWeather(parseWeather.get("main").toString());
 		dateWeather.setIcon(parseWeather.get("icon").toString());
-		dateWeather.setTemperature((double)parseWeather.get("temp"));
+		dateWeather.setTemperature(new BigDecimal(Double.valueOf(parseWeather.get("temp").toString()) - KELVIN_TEMPERATURE)
+			.setScale(2, RoundingMode.FLOOR)
+			.doubleValue());
 
 		return dateWeather;
 	}
@@ -128,7 +134,7 @@ public class DiaryService {
 	// openWeatherMap 에서 날씨 데이터 가져오기
 	private String getWeatherString() {
 		String apiUrl =
-			"https://api.openweathermap.org/data/2.5/weather?q=seoul&appid="
+			"https://api.openweathermap.org/data/2.5/weather?q=seoul&units=metric&appid="
 				+ apiKey;
 
 		try {

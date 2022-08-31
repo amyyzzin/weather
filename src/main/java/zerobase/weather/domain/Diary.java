@@ -1,5 +1,7 @@
 package zerobase.weather.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -23,6 +25,7 @@ public class Diary {
 	private String weather;
 	private String icon;
 	private double temperature;
+
 	private String text;
 	private LocalDate date;
 
@@ -30,6 +33,8 @@ public class Diary {
 		this.date = dateWeather.getDate();
 		this.weather = dateWeather.getWeather();
 		this.icon = dateWeather.getIcon();
-		this.temperature = dateWeather.getTemperature();
+		this.temperature = new BigDecimal(dateWeather.getTemperature() - 273.16)
+			.setScale(2, RoundingMode.FLOOR)
+			.doubleValue();
 	}
 }
