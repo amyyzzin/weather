@@ -109,6 +109,7 @@ public class DiaryService {
 		return diaryRepository.findAllByDate(date);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Diary> readDiaries(LocalDate startDate, LocalDate endDate) {
 		return diaryRepository.findAllByDateBetween(startDate, endDate);
 	}
@@ -118,6 +119,7 @@ public class DiaryService {
 		nowDiary.setText(text);
 		diaryRepository.save(nowDiary);
 	}
+
 
 	public void deleteDiary(LocalDate date) {
 		diaryRepository.deleteAllByDate(date);
