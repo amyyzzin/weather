@@ -29,7 +29,7 @@ import zerobase.weather.repository.DateWeatherRepository;
 import zerobase.weather.repository.DiaryRepository;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class DiaryService {
 
 	@Value("${openWeatherMap.key}")
