@@ -48,7 +48,6 @@ public class DiaryService {
 		this.dateWeatherRepository = dateWeatherRepository;
 	}
 
-
 	//매일 새벽 1시에 날씨 데이터를 받아옴
 	@Scheduled(cron = "0 0 1 * * *")
 	@Transactional
@@ -86,14 +85,15 @@ public class DiaryService {
 		dateWeather.setDate(LocalDate.now());
 		dateWeather.setWeather(parseWeather.get("main").toString());
 		dateWeather.setIcon(parseWeather.get("icon").toString());
-		dateWeather.setTemperature((double) parseWeather.get("temp"));
+		dateWeather.setTemperature((double)parseWeather.get("temp"));
 
 		return dateWeather;
 	}
 
 	private DateWeather getDateWeather(LocalDate date) {
-		List<DateWeather> dateWeatherListFromDB = dateWeatherRepository.findAllByDate(date);
-		if(dateWeatherListFromDB.size() == 0) {
+		List<DateWeather> dateWeatherListFromDB = dateWeatherRepository.findAllByDate(
+			date);
+		if (dateWeatherListFromDB.size() == 0) {
 			return getWeatherFromApi();
 		} else {
 			return dateWeatherListFromDB.get(0);
@@ -103,7 +103,7 @@ public class DiaryService {
 	@Transactional(readOnly = true)
 	public List<Diary> readDiary(LocalDate date) {
 
-		if(date.isAfter(LocalDate.ofYearDay(3050, 1))) {
+		if (date.isAfter(LocalDate.ofYearDay(3050, 1))) {
 			throw new InvalidDate();
 		}
 		return diaryRepository.findAllByDate(date);
@@ -113,7 +113,7 @@ public class DiaryService {
 		return diaryRepository.findAllByDateBetween(startDate, endDate);
 	}
 
-	public void updateDiary (LocalDate date, String text) {
+	public void updateDiary(LocalDate date, String text) {
 		Diary nowDiary = diaryRepository.getFirstByDate(date);
 		nowDiary.setText(text);
 		diaryRepository.save(nowDiary);
@@ -122,7 +122,6 @@ public class DiaryService {
 	public void deleteDiary(LocalDate date) {
 		diaryRepository.deleteAllByDate(date);
 	}
-
 
 	// openWeatherMap 에서 날씨 데이터 가져오기
 	private String getWeatherString() {

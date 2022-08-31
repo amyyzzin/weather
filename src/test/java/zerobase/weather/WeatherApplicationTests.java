@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class WeatherApplicationTests {
 
 	@Test
-	void equalTest(){
-		assertEquals(1,1);
+	void equalTest() {
+		assertEquals(1, 1);
 	}
 
 	@Test
@@ -20,10 +20,6 @@ class WeatherApplicationTests {
 
 	@Test
 	void trueTest() {
-		assertTrue(1==1);
+		assertTrue(1 == 1);
 	}
-
-
-
-
 }

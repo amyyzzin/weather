@@ -26,7 +26,6 @@ public class Diary {
 	private String text;
 	private LocalDate date;
 
-
 	public void setDateWeather(DateWeather dateWeather) {
 		this.date = dateWeather.getDate();
 		this.weather = dateWeather.getWeather();

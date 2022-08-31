@@ -43,8 +43,8 @@ public class JdbcMemoRepository {
 		// ResultSet
 		// {id = 1, text = "this is memo~"}
 		return (rs, rowNum) -> new Memo(
-				rs.getInt("id"),
-				rs.getString("text")
+			rs.getInt("id"),
+			rs.getString("text")
 		);
 	}
 }

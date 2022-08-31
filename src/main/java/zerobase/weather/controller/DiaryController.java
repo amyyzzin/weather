@@ -19,7 +19,6 @@ import zerobase.weather.service.DiaryService;
 
 @RestController
 public class DiaryController {
-
 	private final DiaryService diaryService;
 
 	public DiaryController(DiaryService diaryService) {

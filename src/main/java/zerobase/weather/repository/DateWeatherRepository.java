@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import zerobase.weather.domain.DateWeather;
 
-public interface DateWeatherRepository extends JpaRepository<DateWeather, LocalDate> {
+public interface DateWeatherRepository
+	extends JpaRepository<DateWeather, LocalDate> {
 	List<DateWeather> findAllByDate(LocalDate localDate);
 
 }
